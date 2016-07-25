@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SuwenAndroid2016V1</string>
+    <string name="main_tab_01">素问</string>
+    <string name="main_tab_02">搜索</string>
+    <string name="main_tab_03">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
