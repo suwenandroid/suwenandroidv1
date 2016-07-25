@@ -13,10 +13,7 @@ import com.suwen.suwenandroid2016v1.R;
 
 public class SearchFragment extends Fragment {
 
-
     public SearchFragment() {}
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +29,11 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView(view);
+    }
+
+    private void initView(View view) {
+
     }
 
     @Override
