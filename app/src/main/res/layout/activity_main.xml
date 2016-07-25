@@ -3,32 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".activity.MainActivity">
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="6dp"
+            android:fadingEdge="none"
+            android:footerDividersEnabled="true"
+            android:headerDividersEnabled="true"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="@dimen/mainActivity_bottom_height"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/main_tab_homepage"
-            android:text="@string/main_tab_01"
+            style="@style/MainBottomStyle"
             android:layout_gravity="center"
             android:drawableTop="@mipmap/ic_launcher"
-            style="@style/MainBottomStyle" />
+            android:text="@string/main_tab_01" />
+
         <RadioButton
             android:id="@+id/main_tab_search"
-            android:text="@string/main_tab_02"
+            style="@style/MainBottomStyle"
             android:drawableTop="@drawable/main_tab01_select"
-            style="@style/MainBottomStyle" />
+            android:text="@string/main_tab_02" />
+
         <RadioButton
             android:id="@+id/main_tab_min"
-            android:text="@string/main_tab_03"
+            style="@style/MainBottomStyle"
             android:drawableTop="@mipmap/ic_launcher"
-            style="@style/MainBottomStyle" />
+            android:text="@string/main_tab_03" />
     </RadioGroup>
 </RelativeLayout>

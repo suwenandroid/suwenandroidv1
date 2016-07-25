@@ -1,1 +1,72 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
 /build
+/captures
+
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.class
+*.dex
+*.apk
+*.ap_
+
+# Compile work directory #
+##########################
+bin/
+gen/
+obj/
+tmp/
+out/
+proguard/
+proguard_logs/
+build/
+
+# ide #
+#######
+.loadpath
+.buildpath
+.metadata
+.checkstyle
+local.properties
+*.pydevproject
+*.tmp
+*.launch
+*.bak
+*.swp
+*~.nib
+*.iml
+*.project
+.settings/
+.externalToolBuilders/
+.svn/
+.idea/
+.gradle/
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+# *.7z
+# *.dmg
+# *.gz
+# *.iso
+# *.jar
+# *.rar
+# *.tar
+# *.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
