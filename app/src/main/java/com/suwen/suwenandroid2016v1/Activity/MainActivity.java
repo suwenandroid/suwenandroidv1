@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         listView.setAdapter(adapter);
+        showLoading("正在加载数据。。。");
 
     }
 
@@ -104,7 +105,7 @@ public class MainActivity extends BaseActivity {
                     }
                 });
                 listView.setAdapter(adapter);
-
+                dismissLoading();
             }
 
             @Override

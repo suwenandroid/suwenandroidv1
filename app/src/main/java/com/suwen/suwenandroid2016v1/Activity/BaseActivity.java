@@ -31,6 +31,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 需要接收消息的activity重写改方法
+     * @param event
+     */
     public void onEventMainThread(EventBus event) {
 
     }
