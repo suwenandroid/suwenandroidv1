@@ -52,7 +52,6 @@ class CustomErrorHandler implements ErrorHandler {
             errorDescription = BaseApp.getBaseAppInstance().getString(R.string.errors_no_network);
         } else if (cause.getResponse() == null) {
             errorDescription = BaseApp.getBaseAppInstance().getString(R.string.errors_timeout);
-            ;
         } else if (cause.getResponse().getStatus() == 200) {
             errorDescription = "ok";
         } else {
