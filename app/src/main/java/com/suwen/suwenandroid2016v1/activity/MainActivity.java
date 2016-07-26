@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         listView = (PullToRefreshListView) findViewById(R.id.listview);
         adapter = new DataAdapter(getApplicationContext(), R.layout.item_data, datas);
+        listView.setAdapter(adapter);
         //使用工具类，设置pulltoRefreshListvew的刷新模式
         new RefreshUtil().initListView(getApplicationContext(), PullToRefreshBase.Mode.BOTH, listView);
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -62,7 +63,6 @@ public class MainActivity extends BaseActivity {
                 }, 500);
             }
         });
-        listView.setAdapter(adapter);
 
 
     }
@@ -79,32 +79,7 @@ public class MainActivity extends BaseActivity {
         RestClient.getApiService().getList("1", new Callback<ListData>() {
             @Override
             public void success(ListData listData, Response response) {
-                listView = (PullToRefreshListView) findViewById(R.id.listview);
-                adapter = new DataAdapter(getApplicationContext(), R.layout.item_data, datas);
-                //使用工具类，设置pulltoRefreshListvew的刷新模式
-                new RefreshUtil().initListView(getApplicationContext(), PullToRefreshBase.Mode.BOTH, listView);
-                listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-                    @Override
-                    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                        listView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                refreshData();
-                            }
-                        }, 500);
-                    }
-
-                    @Override
-                    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                        listView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                loadMore();
-                            }
-                        }, 500);
-                    }
-                });
-                adapter.notifyDataSetChanged();
+                adapter.addAll(listData.getDatas());
                 dismissLoading();
             }
 
@@ -128,6 +103,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void refreshData() {
+        adapter.clear();
         initData();
         listView.onRefreshComplete();
     }
