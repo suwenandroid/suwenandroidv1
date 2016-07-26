@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        showLoading("正在加载数据。。。");
     }
 
     @Override
@@ -62,7 +63,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         listView.setAdapter(adapter);
-        showLoading("正在加载数据。。。");
+
 
     }
 
@@ -103,15 +104,16 @@ public class MainActivity extends BaseActivity {
                         }, 500);
                     }
                 });
-                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 dismissLoading();
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                dismissLoading();
             }
         });
+
     }
 
     @Override
