@@ -13,6 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
         tools:context=".activity.MainActivity">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
@@ -27,8 +28,15 @@
             android:headerDividersEnabled="true"
             android:scrollbars="vertical" />
     </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/mian_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/group_main_tab"/>
+
 
     <RadioGroup
+        android:id="@+id/group_main_tab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mainActivity_bottom_height"
         android:layout_alignParentBottom="true"
