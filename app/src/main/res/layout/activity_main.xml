@@ -38,19 +38,19 @@
             android:id="@+id/main_tab_homepage"
             style="@style/MainBottomStyle"
             android:layout_gravity="center"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_01" />
 
         <RadioButton
             android:id="@+id/main_tab_search"
             style="@style/MainBottomStyle"
-            android:drawableTop="@drawable/main_tab01_select"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_02" />
 
         <RadioButton
             android:id="@+id/main_tab_min"
             style="@style/MainBottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_03" />
     </RadioGroup>
 </RelativeLayout>
