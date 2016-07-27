@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
+        android:padding="10dp"
          android:background="@color/color_white">
         <EditText
             android:layout_width="0dp"
@@ -16,22 +16,44 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/ic_search_grap"
             android:drawablePadding="5dp"
+            android:padding="6dp"
             android:hint="@string/search_hint_text"
             android:drawableRight="@mipmap/ic_del_white"
-            android:textColorHint="@color/color_soft_grap"
+            android:textColorHint="@color/color_grap"
             android:background="@drawable/cornner_search_bg"
             android:gravity="center_vertical"/>
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_text"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@null"/>
     </LinearLayout>
+   <ListView
+       android:id="@+id/lv_search_history"
+       android:layout_below="@id/search_bar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:divider="@color/color_grap"
+       android:dividerHeight="1dp"
+       android:layout_margin="10dp"
+       android:cacheColorHint="@color/color_transparent"/>
     <LinearLayout
+        android:layout_below="@id/lv_search_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_grap"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_del_white"
+            android:text="@string/clean_search_history"/>
     </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

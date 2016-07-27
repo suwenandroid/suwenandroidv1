@@ -15,6 +15,7 @@
     <string name="release_to_load">松开加载...</string>
     <string name="search_hint_text">请输入关键字/身体症状</string>
     <string name="search_text">搜索</string>
+    <string name="clean_search_history">清空搜索历史</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
