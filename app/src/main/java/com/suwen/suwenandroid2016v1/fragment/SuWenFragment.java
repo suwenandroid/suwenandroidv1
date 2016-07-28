@@ -1,66 +1,230 @@
 package com.suwen.suwenandroid2016v1.fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.adapter.GalleryPagerAdapter;
+import com.suwen.suwenandroid2016v1.adapter.InfinitePagerAdapter;
+import com.suwen.suwenandroid2016v1.anim.ZoomOutPageTransformer;
+import com.suwen.suwenandroid2016v1.beans.Advert;
+import com.suwen.suwenandroid2016v1.utils.SysUtil;
+import com.suwen.suwenandroid2016v1.views.MyInfiniteViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class SuWenFragment extends Fragment {
+public class SuWenFragment extends BaseFragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private Activity mActivity;
+    private View mRootView;
+    private MyInfiniteViewPager mInfiniteViewPager;
+    private GalleryPagerAdapter mGalleryPagerAdapter;
+    private List<Advert> mDatas = new ArrayList<>();
+    private LinearLayout mLPoint = null;
+    private int mPagerWidth = 0;
+    private static final int LIMIT_PAGES = 4;
+    private static final int MARGIN_10 = 10;
+    private static final int SCROLL_PAGE = 1;
+    private static final int PAGE_DELAY = 4000;
+    private static final int PAGE_COUNT = 1000;
+    private static final int ONE_THOUND = 100;
+    private static final int POINT_WIDTH_HEIGHT = 6;
+    private static final int POINT_MARGIN_LEFT = 5;
+    private static final int POINT_MARGIN_BOTTOM = 20;
+    private int mCurrentPage = 0;
+    private Timer mTimer = null;
+    private TimerTask mTask = null;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SCROLL_PAGE:
+                    mCurrentPage = mCurrentPage + 1;
+                    mInfiniteViewPager.setCurrentItem(mCurrentPage, true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
-    private String mParam1;
-    private String mParam2;
-
-    public SuWenFragment() {}
-
-
-    public static SuWenFragment newInstance(String param1, String param2) {
-        SuWenFragment fragment = new SuWenFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static SuWenFragment getInstance() {
+        return new SuWenFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    protected int getContentView() {
+        return R.layout.fragment_su_wen;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mRootView = super.onCreateView(inflater, container, savedInstanceState);
+        initView(mRootView);
+        initData();
+        return mRootView;
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        Advert advert = new Advert();
+        advert.setAction("Test1");
+        advert.setImgUrl("http://img0.imgtn.bdimg.com/it/u=3691468346,2920721396&fm=21&gp=0.jpg");
+        mDatas.add(advert);
+        Advert advert1 = new Advert();
+        advert1.setAction("Test2");
+        advert1.setImgUrl("http://img5q.duitang.com/uploads/item/201406/21/20140621135038_4Gt4t.jpeg");
+        mDatas.add(advert1);
+        Advert advert3 = new Advert();
+        advert3.setAction("Test3");
+        advert3.setImgUrl("http://cdnq.duitang.com/uploads/item/201504/09/20150409H3025_iXaZe.jpeg");
+        mDatas.add(advert3);
+        Advert advert4 = new Advert();
+        advert4.setAction("Test4");
+        advert4.setImgUrl("http://img4.duitang.com/uploads/item/201408/26/20140826204711_R2tJr.jpeg");
+        mDatas.add(advert4);
+        mGalleryPagerAdapter.notifyDataSetChanged();
+        if (mLPoint != null && mLPoint.getChildCount() > 0) {
+            mLPoint.removeAllViews();
+        }
+        if (mDatas.size() > 0) {
+            for (int i = 0; i < mDatas.size(); i++) {
+                //添加小圆点
+                if (mDatas.size() > 1) {
+                    ImageView imageView = new ImageView(mActivity);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(SysUtil.dip2px(mActivity, POINT_WIDTH_HEIGHT),
+                            SysUtil.dip2px(mActivity, POINT_WIDTH_HEIGHT));
+                    params.setMargins(SysUtil.dip2px(mActivity, POINT_MARGIN_LEFT), SysUtil.dip2px(mActivity, MARGIN_10),
+                            SysUtil.dip2px(mActivity, POINT_MARGIN_LEFT), SysUtil.dip2px(mActivity, POINT_MARGIN_BOTTOM));
+                    imageView.setImageResource(R.drawable.drable_point);
+                    imageView.setLayoutParams(params);
+                    mLPoint.addView(imageView);
+                    if (i == 0) {
+                        imageView.setSelected(true);
+                    }
+                }
+            }
+
+            if (mDatas.size() <= 1) {
+                mPagerWidth = getResources().getDisplayMetrics().widthPixels;
+                mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
+            } else {
+                mPagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 4 / POINT_MARGIN_LEFT);
+                if (mGalleryPagerAdapter == null) {
+                    mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
+                }
+                mGalleryPagerAdapter.notifyDataSetChanged();
+            }
+            ViewGroup.LayoutParams lp = mInfiniteViewPager.getLayoutParams();
+            if (lp == null) {
+                lp = new ViewGroup.LayoutParams(mPagerWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+            } else {
+                lp.width = mPagerWidth;
+            }
+            mInfiniteViewPager.setLayoutParams(lp); //设置页面宽度为屏幕的3/5
+            mInfiniteViewPager.setOffscreenPageLimit(LIMIT_PAGES);  //设置ViewPager至多缓存4个Pager页面，防止多次加载
+            mInfiniteViewPager.setPageMargin(SysUtil.dip2px(mActivity, MARGIN_10));  //设置Pager之间的间距
+            mInfiniteViewPager.setAdapter(new InfinitePagerAdapter(mGalleryPagerAdapter));
+            if (mDatas.size() > 1) {
+                if (mTimer == null) {
+                    mTimer = new Timer();
+                    mTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            mHandler.sendEmptyMessage(SCROLL_PAGE);
+                        }
+                    };
+                    mTimer.schedule(mTask, PAGE_COUNT, PAGE_DELAY);
+                }
+            }
+            mInfiniteViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+            mInfiniteViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset,
+                                           int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    mCurrentPage = position - mDatas.size() * ONE_THOUND;
+                    for (int i = 0; i < mLPoint.getChildCount(); i++) {
+                        if (position % mDatas.size() == i) {
+                            mLPoint.getChildAt(i).setSelected(true);
+                        } else {
+                            mLPoint.getChildAt(i).setSelected(false);
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_su_wen, container, false);
+
+    /**
+     * 初始化UI
+     *
+     * @param mRootView
+     */
+    private void initView(View mRootView) {
+        if (mInfiniteViewPager == null) {
+            mInfiniteViewPager = (MyInfiniteViewPager) mRootView.findViewById(R.id.ad_pager);
+        }
+        if (mLPoint == null) {
+            mLPoint = (LinearLayout) mRootView.findViewById(R.id.ll_point);
+        }
+        mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
+        //移除handler的消息，可以避免内存泄漏
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
+    }
 }

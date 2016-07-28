@@ -84,9 +84,9 @@ public class MainActivity extends BaseActivity {
     private void setBottomTab() {
         mBottomTabGroup = (RadioGroup) this.findViewById(R.id.group_main_tab);
         mFragments = new ArrayList<>();
-        mFragments.add(SuWenFragment.newInstance("",""));
-        mFragments.add(SearchFragment.newInstance("",""));
-        mFragments.add(MineFragment.newInstance("",""));
+        mFragments.add(SuWenFragment.getInstance());
+        mFragments.add(SearchFragment.newInstance("", ""));
+        mFragments.add(MineFragment.newInstance("", ""));
         new BottomTabUtils(mBottomTabGroup, mFragments, getSupportFragmentManager(), R.id.mian_container);
     }
 

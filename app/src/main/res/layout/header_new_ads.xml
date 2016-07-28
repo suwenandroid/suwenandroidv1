@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gallery_viewpager_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:clipChildren="false">
+
+
+    <com.suwen.suwenandroid2016v1.views.MyInfiniteViewPager
+        android:id="@+id/ad_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_ad_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false" />
+
+    <LinearLayout
+        android:id="@+id/ll_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ad_pager"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" />
+</RelativeLayout>
