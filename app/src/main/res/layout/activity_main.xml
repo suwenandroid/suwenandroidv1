@@ -28,11 +28,12 @@
             android:headerDividersEnabled="true"
             android:scrollbars="vertical" />
     </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/mian_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/group_main_tab"/>
+        android:layout_above="@+id/group_main_tab" />
 
 
     <RadioGroup

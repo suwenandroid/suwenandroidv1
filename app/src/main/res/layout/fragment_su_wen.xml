@@ -7,9 +7,29 @@
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/head_ad"
-            layout="@layout/header_new_ads"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/head_ad"
+                layout="@layout/header_new_ads" />
+
+            <com.suwen.suwenandroid2016v1.views.MyListView
+                android:id="@+id/suwen_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/white"
+                android:divider="#e5e5e5"
+                android:dividerHeight="1px">
+
+            </com.suwen.suwenandroid2016v1.views.MyListView>
+        </LinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
 
 </LinearLayout>

@@ -11,28 +11,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.adapter.AbsAdapter;
+import com.suwen.suwenandroid2016v1.adapter.DataAdapter;
 import com.suwen.suwenandroid2016v1.adapter.GalleryPagerAdapter;
 import com.suwen.suwenandroid2016v1.adapter.InfinitePagerAdapter;
 import com.suwen.suwenandroid2016v1.anim.ZoomOutPageTransformer;
 import com.suwen.suwenandroid2016v1.beans.Advert;
+import com.suwen.suwenandroid2016v1.rest.RestClient;
+import com.suwen.suwenandroid2016v1.rest.model.Data;
+import com.suwen.suwenandroid2016v1.rest.model.ListData;
 import com.suwen.suwenandroid2016v1.utils.SysUtil;
+import com.suwen.suwenandroid2016v1.utils.ToastUtils;
 import com.suwen.suwenandroid2016v1.views.MyInfiniteViewPager;
+import com.suwen.suwenandroid2016v1.views.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 
 public class SuWenFragment extends BaseFragment {
 
+    private RelativeLayout mAdContainer;
     private Activity mActivity;
     private View mRootView;
+    private MyListView mListView;
+    private List<Data> mDatas = new ArrayList<>();
+    private AbsAdapter mSuwenAdapter;
     private MyInfiniteViewPager mInfiniteViewPager;
     private GalleryPagerAdapter mGalleryPagerAdapter;
-    private List<Advert> mDatas = new ArrayList<>();
+    private List<Advert> mAderts = new ArrayList<>();
     private LinearLayout mLPoint = null;
     private int mPagerWidth = 0;
     private static final int LIMIT_PAGES = 4;
@@ -90,30 +106,50 @@ public class SuWenFragment extends BaseFragment {
      * 初始化数据
      */
     private void initData() {
+
+        /**
+         * Test接口
+         */
+        //使用RESTFUL风格。一个网络请求的步骤如下：
+        //1:封装请求数据的实体对象，放在rest.model下
+        //2:在ApiServices中添加请求接口
+        //3:通过RestClient.getApiService()调用接口方法，然后传递参数，数据就从服务器自动下载，然后转化为了实体对象，回调到了UI线程
+        RestClient.getApiService().getList("1", new Callback<ListData>() {
+            @Override
+            public void success(ListData listData, Response response) {
+                mSuwenAdapter.addAll(listData.getDatas());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ToastUtils.show(error.getMessage());
+            }
+        });
+
         Advert advert = new Advert();
         advert.setAction("Test1");
         advert.setImgUrl("http://img0.imgtn.bdimg.com/it/u=3691468346,2920721396&fm=21&gp=0.jpg");
-        mDatas.add(advert);
+        mAderts.add(advert);
         Advert advert1 = new Advert();
         advert1.setAction("Test2");
         advert1.setImgUrl("http://img5q.duitang.com/uploads/item/201406/21/20140621135038_4Gt4t.jpeg");
-        mDatas.add(advert1);
+        mAderts.add(advert1);
         Advert advert3 = new Advert();
         advert3.setAction("Test3");
         advert3.setImgUrl("http://cdnq.duitang.com/uploads/item/201504/09/20150409H3025_iXaZe.jpeg");
-        mDatas.add(advert3);
+        mAderts.add(advert3);
         Advert advert4 = new Advert();
         advert4.setAction("Test4");
         advert4.setImgUrl("http://img4.duitang.com/uploads/item/201408/26/20140826204711_R2tJr.jpeg");
-        mDatas.add(advert4);
+        mAderts.add(advert4);
         mGalleryPagerAdapter.notifyDataSetChanged();
         if (mLPoint != null && mLPoint.getChildCount() > 0) {
             mLPoint.removeAllViews();
         }
-        if (mDatas.size() > 0) {
-            for (int i = 0; i < mDatas.size(); i++) {
+        if (mAderts.size() > 0) {
+            for (int i = 0; i < mAderts.size(); i++) {
                 //添加小圆点
-                if (mDatas.size() > 1) {
+                if (mAderts.size() > 1) {
                     ImageView imageView = new ImageView(mActivity);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(SysUtil.dip2px(mActivity, POINT_WIDTH_HEIGHT),
                             SysUtil.dip2px(mActivity, POINT_WIDTH_HEIGHT));
@@ -128,13 +164,13 @@ public class SuWenFragment extends BaseFragment {
                 }
             }
 
-            if (mDatas.size() <= 1) {
+            if (mAderts.size() <= 1) {
                 mPagerWidth = getResources().getDisplayMetrics().widthPixels;
-                mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
+                mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
             } else {
                 mPagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 4 / POINT_MARGIN_LEFT);
                 if (mGalleryPagerAdapter == null) {
-                    mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
+                    mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
                 }
                 mGalleryPagerAdapter.notifyDataSetChanged();
             }
@@ -148,7 +184,7 @@ public class SuWenFragment extends BaseFragment {
             mInfiniteViewPager.setOffscreenPageLimit(LIMIT_PAGES);  //设置ViewPager至多缓存4个Pager页面，防止多次加载
             mInfiniteViewPager.setPageMargin(SysUtil.dip2px(mActivity, MARGIN_10));  //设置Pager之间的间距
             mInfiniteViewPager.setAdapter(new InfinitePagerAdapter(mGalleryPagerAdapter));
-            if (mDatas.size() > 1) {
+            if (mAderts.size() > 1) {
                 if (mTimer == null) {
                     mTimer = new Timer();
                     mTask = new TimerTask() {
@@ -165,14 +201,16 @@ public class SuWenFragment extends BaseFragment {
                 @Override
                 public void onPageScrolled(int position, float positionOffset,
                                            int positionOffsetPixels) {
-
+                    if (mAdContainer != null) {
+                        mAdContainer.invalidate();  //更新超出区域页面，否则会出现页面缓存，导致页面效果不佳
+                    }
                 }
 
                 @Override
                 public void onPageSelected(int position) {
-                    mCurrentPage = position - mDatas.size() * ONE_THOUND;
+                    mCurrentPage = position - mAderts.size() * ONE_THOUND;
                     for (int i = 0; i < mLPoint.getChildCount(); i++) {
-                        if (position % mDatas.size() == i) {
+                        if (position % mAderts.size() == i) {
                             mLPoint.getChildAt(i).setSelected(true);
                         } else {
                             mLPoint.getChildAt(i).setSelected(false);
@@ -196,13 +234,21 @@ public class SuWenFragment extends BaseFragment {
      * @param mRootView
      */
     private void initView(View mRootView) {
+        if (mListView == null) {
+            mListView = (MyListView) mRootView.findViewById(R.id.suwen_listview);
+        }
+        mListView.setFocusable(false);
+        mSuwenAdapter = new DataAdapter(mActivity, R.layout.item_data, mDatas);
+        mListView.setAdapter(mSuwenAdapter);
+
         if (mInfiniteViewPager == null) {
             mInfiniteViewPager = (MyInfiniteViewPager) mRootView.findViewById(R.id.ad_pager);
         }
         if (mLPoint == null) {
             mLPoint = (LinearLayout) mRootView.findViewById(R.id.ll_point);
         }
-        mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mDatas);
+        mAdContainer = (RelativeLayout) mRootView.findViewById(R.id.gallery_viewpager_layout);
+        mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
     }
 
 
