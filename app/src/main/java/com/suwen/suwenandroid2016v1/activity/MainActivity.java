@@ -1,15 +1,21 @@
 package com.suwen.suwenandroid2016v1.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.suwen.suwenandroid2016v1.R;
 import com.suwen.suwenandroid2016v1.adapter.DataAdapter;
+import com.suwen.suwenandroid2016v1.fragment.MineFragment;
+import com.suwen.suwenandroid2016v1.fragment.SearchFragment;
+import com.suwen.suwenandroid2016v1.fragment.SuWenFragment;
 import com.suwen.suwenandroid2016v1.rest.RestClient;
 import com.suwen.suwenandroid2016v1.rest.model.Data;
 import com.suwen.suwenandroid2016v1.rest.model.ListData;
+import com.suwen.suwenandroid2016v1.utils.BottomTabUtils;
 import com.suwen.suwenandroid2016v1.utils.RefreshUtil;
 
 import java.util.ArrayList;
@@ -23,6 +29,12 @@ public class MainActivity extends BaseActivity {
     private PullToRefreshListView listView;
     private List<Data> datas = new ArrayList<>();
     private DataAdapter adapter;
+    /**
+     * 底部Tab RadioGroup
+     */
+    private RadioGroup mBottomTabGroup;
+    private List<Fragment> mFragments;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +49,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setBottomTab(); //处理底部的Tab
         listView = (PullToRefreshListView) findViewById(R.id.listview);
         adapter = new DataAdapter(getApplicationContext(), R.layout.item_data, datas);
         listView.setAdapter(adapter);
@@ -65,6 +78,16 @@ public class MainActivity extends BaseActivity {
         });
 
 
+    }
+
+    //设置main底部的Tab
+    private void setBottomTab() {
+        mBottomTabGroup = (RadioGroup) this.findViewById(R.id.group_main_tab);
+        mFragments = new ArrayList<>();
+        mFragments.add(SuWenFragment.newInstance("",""));
+        mFragments.add(SearchFragment.newInstance("",""));
+        mFragments.add(MineFragment.newInstance("",""));
+        new BottomTabUtils(mBottomTabGroup, mFragments, getSupportFragmentManager(), R.id.mian_container);
     }
 
     @Override

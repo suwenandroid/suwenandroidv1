@@ -3,8 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorSoftGrap">#B0C4DE</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_soft_grap">#F5F5F5</color>
+    <color name="color_grap">#C0C0C0</color>
+    <color name="color_transparent">@android:color/transparent</color>
     <color name="tab_textColor_select">#FF1C94EA</color>
     <color name="tab_textColor_unSelect">#FFDCE0DF</color>
 </resources>

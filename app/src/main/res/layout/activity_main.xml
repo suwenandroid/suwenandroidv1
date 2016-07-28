@@ -13,6 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
         tools:context=".activity.MainActivity">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
@@ -27,8 +28,15 @@
             android:headerDividersEnabled="true"
             android:scrollbars="vertical" />
     </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/mian_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/group_main_tab"/>
+
 
     <RadioGroup
+        android:id="@+id/group_main_tab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mainActivity_bottom_height"
         android:layout_alignParentBottom="true"
@@ -38,19 +46,19 @@
             android:id="@+id/main_tab_homepage"
             style="@style/MainBottomStyle"
             android:layout_gravity="center"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_01" />
 
         <RadioButton
             android:id="@+id/main_tab_search"
             style="@style/MainBottomStyle"
-            android:drawableTop="@drawable/main_tab01_select"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_02" />
 
         <RadioButton
             android:id="@+id/main_tab_min"
             style="@style/MainBottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/select_main_tab_mine"
             android:text="@string/main_tab_03" />
     </RadioGroup>
 </RelativeLayout>
