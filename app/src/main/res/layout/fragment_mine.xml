@@ -2,11 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我的"
-        android:gravity="center"
-        android:layout_gravity="center"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/color_soft_grap">
+                <ImageButton
+                    android:id="@+id/imgbtn_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:padding="3dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/ic_del_white"
+                    android:layout_marginLeft="10dp"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="centerCrop"
+                    android:layout_centerInParent="true"
+                    android:background="@null"/>
+                <ImageButton
+                    android:id="@+id/imgbtn_setting"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_del_white"
+                    android:padding="3dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <com.suwen.suwenandroid2016v1.views.ListViewForScrollView
+                android:id="@+id/lv_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@color/color_transparent"
+                android:dividerHeight="1dp"
+                android:divider="@color/color_soft_grap"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
