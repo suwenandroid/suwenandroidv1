@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.suwen.suwenandroid2016v1.R;
 import com.suwen.suwenandroid2016v1.adapter.SearchHistoryAdapter;
+import com.suwen.suwenandroid2016v1.views.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,9 @@ public class SearchFragment extends Fragment {
     private ListView mSearchHistoryListView;
     private List<String> mHistoryDatas;
     private SearchHistoryAdapter mHistoryAdapter;
+
+    private FlowLayout mFlowLayout;
+    private LinearLayout.LayoutParams mParams;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -61,6 +67,7 @@ public class SearchFragment extends Fragment {
 
 
     private void initView(View view) {
+        mFlowLayout = (FlowLayout) view.findViewById(R.id.flow_search);
         mSearchHistoryListView = (ListView) view.findViewById(R.id.lv_search_history);
         mHistoryDatas = new ArrayList<>();
         mHistoryAdapter = new SearchHistoryAdapter(mContext,R.layout.item_search_history,mHistoryDatas);
@@ -72,6 +79,16 @@ public class SearchFragment extends Fragment {
         mHistoryDatas.add("眼睛干涩");
         mHistoryDatas.add("大姨妈不调");
         mHistoryAdapter.notifyDataSetChanged();
+        mParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView tvTab = null;
+        for(int i = 0; i<5 ;i++) {
+            tvTab = new TextView(mContext);
+            tvTab.setText("中国人民晚睡"+i);
+            mParams.leftMargin = 10;
+            tvTab.setPadding(10,10,10,10);
+            tvTab.setLayoutParams(mParams);
+            mFlowLayout.addView(tvTab);
+        }
     }
 
     @Override
