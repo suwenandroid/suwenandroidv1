@@ -1,6 +1,7 @@
 package com.suwen.suwenandroid2016v1.fragment;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,10 +24,14 @@ import com.suwen.suwenandroid2016v1.beans.Advert;
 import com.suwen.suwenandroid2016v1.rest.RestClient;
 import com.suwen.suwenandroid2016v1.rest.model.Data;
 import com.suwen.suwenandroid2016v1.rest.model.ListData;
+import com.suwen.suwenandroid2016v1.utils.CommonUtils;
 import com.suwen.suwenandroid2016v1.utils.SysUtil;
 import com.suwen.suwenandroid2016v1.utils.ToastUtils;
+import com.suwen.suwenandroid2016v1.utils.popup.BaseDialog;
+import com.suwen.suwenandroid2016v1.utils.popup.PopupUtils;
 import com.suwen.suwenandroid2016v1.views.MyInfiniteViewPager;
 import com.suwen.suwenandroid2016v1.views.MyListView;
+import com.suwen.suwenandroid2016v1.views.TabsScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +43,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class SuWenChildFragment extends BaseFragment {
+public class SuWenChildFragment extends BaseFragment implements View.OnClickListener {
 
     private RelativeLayout mAdContainer;
+    private ImageView ivMore;
     private Activity mActivity;
     private MyListView mListView;
     private List<Data> mDatas = new ArrayList<>();
@@ -49,6 +55,8 @@ public class SuWenChildFragment extends BaseFragment {
     private GalleryPagerAdapter mGalleryPagerAdapter;
     private List<Advert> mAderts = new ArrayList<>();
     private LinearLayout mLPoint = null;
+    private TabsScroller mTabsScroller;
+    private List<String> mStringList = new ArrayList<>();
     private int mPagerWidth = 0;
     private static final int LIMIT_PAGES = 4;
     private static final int MARGIN_10 = 10;
@@ -101,11 +109,32 @@ public class SuWenChildFragment extends BaseFragment {
         return mRootView;
     }
 
+    private void setTabPagerIndicator() {
+        mTabsScroller.setIndicatorMode(TabsScroller.IndicatorMode.MODE_NOWEIGHT_EXPAND_NOSAME);// 设置模式，一定要先设置模式
+        mTabsScroller.setDividerColor(Color.parseColor("#00bbcf"));// 设置分割线的颜色
+        mTabsScroller.setDividerPadding(CommonUtils.dip2px(mActivity, 10));
+        mTabsScroller.setIndicatorColor(Color.parseColor("#43A44b"));// 设置底部导航线的颜色
+        mTabsScroller.setTextColorSelected(Color.parseColor("#ffffff"));// 设置tab标题选中的颜色
+        mTabsScroller.setTextColor(Color.parseColor("#666666"));// 设置tab标题未被选中的颜色
+        mTabsScroller.setTextSize(16);// 设置字体大小
+    }
+
     /**
      * 初始化数据
      */
     private void initData() {
+        mStringList.add("测试1111");
+        mStringList.add("测试2222");
+        mStringList.add("测试3333");
+        mStringList.add("测试444");
+        mStringList.add("测试555");
+        mStringList.add("测试666");
+        mStringList.add("测试777");
+        mStringList.add("测试8");
+        mStringList.add("测试9");
 
+        mTabsScroller.setIndicatorMode(TabsScroller.IndicatorMode.MODE_NOWEIGHT_EXPAND_SAME);
+        mTabsScroller.setStrings(mStringList);
         /**
          * Test接口
          */
@@ -250,6 +279,21 @@ public class SuWenChildFragment extends BaseFragment {
         }
         mAdContainer = (RelativeLayout) mRootView.findViewById(R.id.gallery_viewpager_layout);
         mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
+        mTabsScroller = (TabsScroller) mRootView.findViewById(R.id.tabscroller);
+        ivMore = (ImageView) mRootView.findViewById(R.id.suwen_iv_more);
+        ivMore.setOnClickListener(this);
+        setTabPagerIndicator();
+        mTabsScroller.setCallBack(new TabsScroller.CallBack() {
+            @Override
+            public void callBack(int position) {
+                PopupUtils.showDialog(mActivity, "我是标题", "被点击的是-----" + position, new BaseDialog.OnButtonClickListener() {
+                    @Override
+                    public void onClick(Object result) {
+
+                    }
+                });
+            }
+        });
     }
 
 
@@ -272,6 +316,15 @@ public class SuWenChildFragment extends BaseFragment {
         //移除handler的消息，可以避免内存泄漏
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.suwen_iv_more:
+                mTabsScroller.scrollToCenter();
+                break;
         }
     }
 }

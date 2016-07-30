@@ -4,6 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f00">
+
+        <com.suwen.suwenandroid2016v1.views.TabsScroller
+            android:id="@+id/tabscroller"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/suwen_iv_more" />
+
+        <ImageView
+            android:id="@+id/suwen_iv_more"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iv_rirht" />
+    </RelativeLayout>
+
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <include
                 android:id="@+id/head_ad"
