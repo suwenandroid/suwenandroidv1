@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 
+import com.umeng.analytics.MobclickAgent;
+
 /**
  * Created by Administrator on 2016/7/25.
  */
@@ -25,6 +27,7 @@ public class BaseApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         INFLATER = LayoutInflater.from(this);
         AppInstance = this;
         context = this;

@@ -35,12 +35,19 @@
             android:paddingTop="10dp"
             android:text="@string/search_text" />
     </LinearLayout>
+    <com.suwen.suwenandroid2016v1.views.FlowLayout
+        android:id="@+id/flow_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar">
+
+    </com.suwen.suwenandroid2016v1.views.FlowLayout>
 
     <ListView
         android:id="@+id/lv_search_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_bar"
+        android:layout_below="@id/flow_search"
         android:layout_margin="10dp"
         android:cacheColorHint="@color/color_transparent"
         android:divider="@color/color_grap"
