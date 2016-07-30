@@ -38,11 +38,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class SuWenFragment extends BaseFragment {
+public class SuWenChildFragment extends BaseFragment {
 
     private RelativeLayout mAdContainer;
     private Activity mActivity;
-    private View mRootView;
     private MyListView mListView;
     private List<Data> mDatas = new ArrayList<>();
     private AbsAdapter mSuwenAdapter;
@@ -78,13 +77,13 @@ public class SuWenFragment extends BaseFragment {
         }
     };
 
-    public static SuWenFragment getInstance() {
-        return new SuWenFragment();
+    public static SuWenChildFragment getInstance() {
+        return new SuWenChildFragment();
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_su_wen;
+        return R.layout.fragment_suwen_child;
     }
 
     @Override
@@ -125,7 +124,9 @@ public class SuWenFragment extends BaseFragment {
                 ToastUtils.show(error.getMessage());
             }
         });
-
+        if (mAderts != null) {
+            mAderts.clear();
+        }
         Advert advert = new Advert();
         advert.setAction("Test1");
         advert.setImgUrl("http://img0.imgtn.bdimg.com/it/u=3691468346,2920721396&fm=21&gp=0.jpg");
