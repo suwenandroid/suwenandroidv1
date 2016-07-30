@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Dialog_Header"
+    android:layout_width="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Dialog_Header_Title" />
+
+    <View
+        android:id="@+id/bottom_line"
+        style="@style/Dialog_Header_BottomLine" />
+</RelativeLayout>
