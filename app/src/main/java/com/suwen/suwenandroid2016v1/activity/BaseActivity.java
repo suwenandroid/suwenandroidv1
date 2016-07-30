@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 
 import com.suwen.suwenandroid2016v1.dialog.CustomProgressDiolog;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
 import de.greenrobot.event.EventBus;
 
@@ -23,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PushAgent.getInstance(getApplicationContext()).onAppStart();
         setContentView(getContentView());
         initView();
         initData();
