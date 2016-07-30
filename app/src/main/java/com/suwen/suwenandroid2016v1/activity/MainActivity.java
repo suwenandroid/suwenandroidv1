@@ -7,7 +7,7 @@ import android.widget.RadioGroup;
 import com.suwen.suwenandroid2016v1.R;
 import com.suwen.suwenandroid2016v1.fragment.MineFragment;
 import com.suwen.suwenandroid2016v1.fragment.SearchFragment;
-import com.suwen.suwenandroid2016v1.fragment.SuWenFragment;
+import com.suwen.suwenandroid2016v1.fragment.SuwenFragment;
 import com.suwen.suwenandroid2016v1.utils.BottomTabUtils;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
     private void setBottomTab() {
         mBottomTabGroup = (RadioGroup) this.findViewById(R.id.group_main_tab);
         mFragments = new ArrayList<>();
-        mFragments.add(SuWenFragment.getInstance());
+        mFragments.add(SuwenFragment.getInstance());
         mFragments.add(SearchFragment.newInstance("", ""));
         mFragments.add(MineFragment.newInstance("", ""));
         new BottomTabUtils(mBottomTabGroup, mFragments, getSupportFragmentManager(), R.id.mian_container);

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.suwen.suwenandroid2016v1.fragment.SuWenFragment">
+    tools:context=".fragment.SuWenChildFragment">
 
     <LinearLayout
         android:id="@+id/search_bar"
