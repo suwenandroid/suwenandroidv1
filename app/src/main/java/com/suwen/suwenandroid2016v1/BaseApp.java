@@ -31,7 +31,7 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
         //友盟设置成debug调试防止数据污染
-        MobclickAgent.setDebugMode(false);
+     //    MobclickAgent.setDebugMode(false);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         PushAgent mPushAgent = PushAgent.getInstance(this);
         mPushAgent.enable();

@@ -1,53 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/color_soft_grap">
+
                 <ImageButton
                     android:id="@+id/imgbtn_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:padding="3dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@mipmap/ic_del_white"
-                    android:layout_marginLeft="10dp"/>
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_del_white" />
+
                 <ImageButton
+                    android:id="@+id/avater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="centerCrop"
                     android:layout_centerInParent="true"
-                    android:background="@null"/>
+                    android:background="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/avater"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="chanzhao"
+                    android:textColor="@color/tab_textColor_select" />
+
                 <ImageButton
                     android:id="@+id/imgbtn_setting"
-                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_del_white"
-                    android:padding="3dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_del_white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/ic_del_white"
+                        android:text="我的爱好" />
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/black"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/ic_del_white"
+                        android:text="我的收藏" />
+                </LinearLayout>
             </RelativeLayout>
+
             <com.suwen.suwenandroid2016v1.views.ListViewForScrollView
                 android:id="@+id/lv_min"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:cacheColorHint="@color/color_transparent"
-                android:dividerHeight="1dp"
-                android:divider="@color/color_soft_grap"/>
-
+                android:divider="@color/color_transparent"/>
         </LinearLayout>
     </ScrollView>
 

@@ -7,11 +7,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.adapter.MineAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MineFragment extends Fragment {
+    private Context mContext;
+    private ListView mListView;
+    private MineAdapter mineAdapter;
+    private List<String> mList;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -33,6 +42,7 @@ public class MineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = getActivity().getApplicationContext();
     }
 
     @Override
@@ -44,6 +54,23 @@ public class MineFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        loadData();
+    }
+
+    private void loadData() {
+        mList.add("我的钱包");
+        mList.add("分享给好友");
+        mList.add("联系我们");
+        mList.add("收货地址");
+        mineAdapter.notifyDataSetChanged();
+    }
+
+    private void initView(View view) {
+        mListView = (ListView) view.findViewById(R.id.lv_min);
+        mList = new ArrayList<>();
+        mineAdapter  = new MineAdapter(mContext,R.layout.item_mine,mList);
+        mListView.setAdapter(mineAdapter);
     }
 
     @Override
