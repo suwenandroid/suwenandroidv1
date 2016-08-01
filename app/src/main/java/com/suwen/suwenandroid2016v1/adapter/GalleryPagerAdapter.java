@@ -2,6 +2,7 @@ package com.suwen.suwenandroid2016v1.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.suwen.suwenandroid2016v1.R;
-import com.suwen.suwenandroid2016v1.beans.Advert;
+import com.suwen.suwenandroid2016v1.beans.AdverList;
 import com.suwen.suwenandroid2016v1.log.MyLog;
+import com.suwen.suwenandroid2016v1.utils.popup.PopupUtils;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import java.util.List;
  */
 
 public class GalleryPagerAdapter extends PagerAdapter {
-    private List<Advert> mDatas;
+    private List<AdverList.DataBean> mDatas;
     private Context mContext;
     private int mPagerWidth = 0;
     private static final int DEFAULT_WIDTH_HEIGHT = 600;
@@ -40,7 +42,7 @@ public class GalleryPagerAdapter extends PagerAdapter {
      * @param context 上下文对象
      * @param datas   要显示的广告数据
      */
-    public GalleryPagerAdapter(Context context, List<Advert> datas) {
+    public GalleryPagerAdapter(Context context, List<AdverList.DataBean> datas) {
         this.mDatas = datas;
         this.mContext = context;
         if (datas.size() == 1) {
@@ -70,7 +72,7 @@ public class GalleryPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
-        View view = createView(mDatas.get(position).getImgUrl(), mDatas.get(position).getAction());
+        View view = createView(mDatas.get(position).getImgUrl(), mDatas.get(position).getTitle(), position);
         container.addView(view);
         return view;
     }
@@ -82,7 +84,7 @@ public class GalleryPagerAdapter extends PagerAdapter {
      * @param title 图片的标题
      * @return 创建的view
      */
-    public View createView(String url, String title) {
+    public View createView(String url, String title, final int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.pager_ads, null);
         RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.rl);
         ImageView iv = (ImageView) view.findViewById(R.id.iv);
@@ -98,6 +100,17 @@ public class GalleryPagerAdapter extends PagerAdapter {
         Glide.with(mContext).load(url).placeholder(R.drawable.default_big).fallback(R.drawable.default_big).into(iv);
         iv.setLayoutParams(lp);
         tv.setText(title);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdverList.DataBean dataBean = mDatas.get(position);
+                if (!TextUtils.isEmpty(dataBean.getHrefUrl())) {
+                    PopupUtils.showDialog(mContext,"点击了广告栏","应该进入浏览器",null);
+                } else {
+                    PopupUtils.showDialog(mContext,"点击了广告栏","应该进入详情页",null);
+                }
+            }
+        });
         return view;
     }
 

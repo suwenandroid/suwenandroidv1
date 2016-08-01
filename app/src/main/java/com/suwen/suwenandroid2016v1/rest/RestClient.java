@@ -28,7 +28,7 @@ import retrofit.converter.GsonConverter;
  * Client Rest
  */
 public class RestClient {
-    public static final String BASE_URL = "http://app.vmoiver.com/apiv3";
+    public static final String BASE_URL = "http://115.28.203.44:8010/";
     private static ApiService apiService;
 
     /**
