@@ -32,9 +32,10 @@
             android:value="suwen" />
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="22cd0bc2b4387ff1b2c7a5cbb8ea04b7"></meta-data>
+            android:value="22cd0bc2b4387ff1b2c7a5cbb8ea04b7" />
 
-        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.AppSettingActivity"></activity>
     </application>
 
 </manifest>

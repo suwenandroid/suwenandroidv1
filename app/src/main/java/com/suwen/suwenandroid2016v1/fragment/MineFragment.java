@@ -8,10 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.activity.AppSettingActivity;
 import com.suwen.suwenandroid2016v1.activity.UserInfoActivity;
 import com.suwen.suwenandroid2016v1.adapter.MineAdapter;
 
@@ -27,6 +30,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     //头像按钮
     private ImageButton imgAvater;
+    //设置的按钮
+    private TextView tvSetting;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -73,12 +78,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void setListener() {
         imgAvater.setOnClickListener(this);
+        tvSetting.setOnClickListener(this);
     }
 
     private void loadData() {
-        mList.add("我的钱包");
+        mList.add("App设置");
         mList.add("分享给好友");
-        mList.add("联系我们");
         mList.add("意见反馈");
         mList.add("关于");
         mineAdapter.notifyDataSetChanged();
@@ -90,6 +95,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mineAdapter = new MineAdapter(mContext, R.layout.item_mine, mList);
         mListView.setAdapter(mineAdapter);
         imgAvater = (ImageButton) view.findViewById(R.id.imgbtn_mine_avater);
+        tvSetting = (TextView) view.findViewById(R.id.tv_setting);
     }
 
     @Override
@@ -108,6 +114,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.imgbtn_mine_avater:
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                break;
+            case R.id.tv_setting:
+                startActivity(new Intent(getActivity(), AppSettingActivity.class));
                 break;
             default:
                 break;
