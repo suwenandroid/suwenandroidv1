@@ -62,7 +62,8 @@ public class MineFragment extends Fragment {
         mList.add("我的钱包");
         mList.add("分享给好友");
         mList.add("联系我们");
-        mList.add("收货地址");
+        mList.add("意见反馈");
+        mList.add("关于");
         mineAdapter.notifyDataSetChanged();
     }
 

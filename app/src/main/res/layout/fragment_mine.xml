@@ -16,7 +16,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/color_soft_grap">
+                android:background="@mipmap/bg_min">
 
                 <ImageButton
                     android:id="@+id/imgbtn_msg"
@@ -46,14 +46,17 @@
                     android:text="chanzhao"
                     android:textColor="@color/tab_textColor_select" />
 
-                <ImageButton
-                    android:id="@+id/imgbtn_setting"
+                <TextView
+                    android:id="@+id/btn_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:padding="3dp"
+                    android:background="@null"
+                    android:text="设置"
+                    android:textColor="@color/white"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_del_white" />
 
@@ -92,7 +95,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:cacheColorHint="@color/color_transparent"
-                android:divider="@color/color_transparent"/>
+                android:divider="@color/color_soft_grap"
+                android:dividerHeight="1dp"/>
         </LinearLayout>
     </ScrollView>
 

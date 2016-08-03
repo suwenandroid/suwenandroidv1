@@ -3,31 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="3dp">
+    android:padding="15dp"
+    android:gravity="center_vertical">
+
     <ImageView
+        android:id="@+id/img_mine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:padding="10dp"
+        android:layout_gravity="center"
         android:layout_marginRight="10dp"
-        android:src="@mipmap/ic_launcher"/>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:padding="15dp"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_mine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="健康卡券"
-            android:drawableRight="@mipmap/ic_search_grap"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="25dp"
-            android:background="@color/color_grap"/>
-    </LinearLayout>
+        android:padding="10dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_mine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/right_sm"
+        android:text="健康卡券"
+        android:padding="10dp"/>
 
 </LinearLayout>
