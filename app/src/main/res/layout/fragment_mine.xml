@@ -29,7 +29,7 @@
                     android:src="@mipmap/ic_del_white" />
 
                 <ImageButton
-                    android:id="@+id/avater"
+                    android:id="@+id/imgbtn_mine_avater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/avater"
+                    android:layout_below="@id/imgbtn_mine_avater"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:text="chanzhao"

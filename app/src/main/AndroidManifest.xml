@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".BaseApp"
@@ -23,12 +23,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <meta-data android:value="579c9cb1e0f55aee6f001f1a" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="suwen" android:name="UMENG_CHANNEL"/>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="579c9cb1e0f55aee6f001f1a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="suwen" />
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="22cd0bc2b4387ff1b2c7a5cbb8ea04b7" >
-        </meta-data>
+            android:value="22cd0bc2b4387ff1b2c7a5cbb8ea04b7"></meta-data>
+
+        <activity android:name=".activity.UserInfoActivity"></activity>
     </application>
 
 </manifest>

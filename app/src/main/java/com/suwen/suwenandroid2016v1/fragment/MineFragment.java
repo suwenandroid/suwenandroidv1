@@ -1,27 +1,32 @@
 package com.suwen.suwenandroid2016v1.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.activity.UserInfoActivity;
 import com.suwen.suwenandroid2016v1.adapter.MineAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment implements View.OnClickListener {
     private Context mContext;
     private ListView mListView;
     private MineAdapter mineAdapter;
     private List<String> mList;
 
+    //头像按钮
+    private ImageButton imgAvater;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -37,12 +42,19 @@ public class MineFragment extends Fragment {
         return fragment;
     }
 
-    public MineFragment() {}
+    public MineFragment() {
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity().getApplicationContext();
+    }
+
+    @Override
+    protected int getContentView() {
+
+        return R.layout.fragment_mine;
     }
 
     @Override
@@ -56,6 +68,11 @@ public class MineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         loadData();
+        setListener();
+    }
+
+    private void setListener() {
+        imgAvater.setOnClickListener(this);
     }
 
     private void loadData() {
@@ -70,8 +87,9 @@ public class MineFragment extends Fragment {
     private void initView(View view) {
         mListView = (ListView) view.findViewById(R.id.lv_min);
         mList = new ArrayList<>();
-        mineAdapter  = new MineAdapter(mContext,R.layout.item_mine,mList);
+        mineAdapter = new MineAdapter(mContext, R.layout.item_mine, mList);
         mListView.setAdapter(mineAdapter);
+        imgAvater = (ImageButton) view.findViewById(R.id.imgbtn_mine_avater);
     }
 
     @Override
@@ -85,5 +103,14 @@ public class MineFragment extends Fragment {
     }
 
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgbtn_mine_avater:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                break;
+            default:
+                break;
+        }
+    }
 }
