@@ -4,6 +4,17 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+
+
+    signingConfigs {
+        //debug版本的签名配置,通常不用配，因为有默认的debug签名
+        debug {
+
+        }
+        release {
+
+        }
+    }
     defaultConfig {
         applicationId "com.suwen.suwenandroid2016v1"
         minSdkVersion 15
@@ -13,10 +24,13 @@ android {
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
+            shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -29,7 +43,6 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
-
     compile project(':library')
     compile project(':PushSDK')
 }
