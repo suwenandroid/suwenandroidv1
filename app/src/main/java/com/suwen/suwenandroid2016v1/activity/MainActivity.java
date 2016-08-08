@@ -116,7 +116,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void BottomTabCurIndex(int index) {
         setTitleText(index);
         mCbHumble.setChecked(false);
-
     }
 
     private void setTitleText(int index) {

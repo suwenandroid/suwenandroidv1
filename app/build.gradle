@@ -4,14 +4,16 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
-
-
     signingConfigs {
         //debug版本的签名配置,通常不用配，因为有默认的debug签名
         debug {
 
         }
         release {
+            storeFile file("")
+            storePassword "su2016wen"
+            keyAlias "myKey"
+            keyPassword"20suwen16"
 
         }
     }
