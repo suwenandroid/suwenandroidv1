@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -36,7 +39,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     //title上面的汉堡包
     private CheckBox mCbHumble;
     private BottomTabUtils bottomTabUtils;
-    private ListPopupWindow mListPopWindow;
+    private ListView mHumbleList;
     private MainListPopAdapter mPopAdapter;
 
 
@@ -47,7 +50,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     private void setListener() {
-        mCbHumble.setOnClickListener(this);
+      //  mCbHumble.setOnClickListener(this);
+        mCbHumble.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showPopWindow();
+            }
+        });
     }
 
     @Override
@@ -59,19 +68,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void initView() {
         mTvTitle = (TextView) this.findViewById(R.id.tv_activit_title);
         mCbHumble = (CheckBox) this.findViewById(R.id.checkbox_hamble);
+        mHumbleList = (ListView) this.findViewById(R.id.lv_humble);
         mPopAdapter = new MainListPopAdapter(getApplication(),R.layout.item_main_listpopwindow,Arrays.asList(getResources().getStringArray(R.array.array_main_humble)));
-        mListPopWindow = new ListPopupWindow(getApplication());
-        mListPopWindow.setAdapter(mPopAdapter);
-        mListPopWindow.setWidth(120);
-        mListPopWindow.setHeight(ListPopupWindow.WRAP_CONTENT);
-        mListPopWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtils.show("position:"+position);
-            }
-        });
-
-
+        mHumbleList.setAdapter(mPopAdapter);
     }
 
     //设置main底部的Tab
@@ -100,34 +99,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.checkbox_hamble:
-                showPopWindow();
-                break;
-            default:
-                break;
-        }
+
     }
 
     private void showPopWindow() {
         if (mCbHumble.isChecked()) {
             //显示popWindow
-            ToastUtils.show(mCbHumble.isChecked() + "");
-            //指定anchor
-            mListPopWindow.setAnchorView(mCbHumble);
-            mListPopWindow.show();
+           mHumbleList.setVisibility(View.VISIBLE);
         } else {
             //隐藏popWindow
-            if(mListPopWindow != null) {
-                mListPopWindow.dismiss();
-            }
-            ToastUtils.show(mCbHumble.isChecked() + "");
+            mHumbleList.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void BottomTabCurIndex(int index) {
         setTitleText(index);
+        mCbHumble.setChecked(false);
 
     }
 
