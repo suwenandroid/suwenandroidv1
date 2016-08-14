@@ -2,6 +2,8 @@ package com.suwen.suwenandroid2016v1.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.okhttp.internal.framed.FrameReader;
 import com.suwen.suwenandroid2016v1.R;
 import com.suwen.suwenandroid2016v1.adapter.SearchHistoryAdapter;
 import com.suwen.suwenandroid2016v1.views.FlowLayout;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment  {
     private Context mContext;
     /**搜索历史记录ListView*/
     private ListView mSearchHistoryListView;
@@ -102,5 +105,8 @@ public class SearchFragment extends Fragment {
     }
 
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

@@ -23,16 +23,26 @@ public class BottomTabUtils implements RadioGroup.OnCheckedChangeListener {
     private List<Fragment> mFragments;
     private FragmentManager mFragmentmgr;
     private int mContainerId;
+    private BottomTabCallback callback;
 
-    public BottomTabUtils(RadioGroup mRadioGroup, List<Fragment> mFragments, FragmentManager mManager, int mContainerId) {
+    public BottomTabUtils(RadioGroup mRadioGroup, List<Fragment> mFragments, FragmentManager mManager, int mContainerId,BottomTabCallback callback) {
         this.mRadioGroup = mRadioGroup;
         this.mFragments = mFragments;
         this.mFragmentmgr = mManager;
         this.mContainerId = mContainerId;
+        this.callback = callback;
         mRadioGroup.setOnCheckedChangeListener(this);
         ((RadioButton) mRadioGroup.getChildAt(0)).setChecked(true);
     }
 
+    public void registBottomTabCallback(BottomTabCallback callback) {
+        this.callback = callback;
+    }
+    public void unRegistBottomTabCallback() {
+        if(callback != null) {
+            callback = null;
+        }
+    }
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         for (int i = 0; i < group.getChildCount(); i++) {
@@ -43,6 +53,7 @@ public class BottomTabUtils implements RadioGroup.OnCheckedChangeListener {
                     transaction.add(mContainerId, mFragment).commit();
                 }
                 showFragment(i);
+                callback.BottomTabCurIndex(i);
             }
         }
     }
@@ -74,5 +85,8 @@ public class BottomTabUtils implements RadioGroup.OnCheckedChangeListener {
 //            ft.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
 //        }
         return mTransaction;
+    }
+    public interface BottomTabCallback{
+        void BottomTabCurIndex(int index);
     }
 }

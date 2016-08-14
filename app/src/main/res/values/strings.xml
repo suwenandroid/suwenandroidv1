@@ -21,4 +21,16 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="dialog_title">温馨提示</string>
+    <!--主页title-->
+    <string-array name="array_title_name">
+        <item>素问</item>
+        <item>搜索</item>
+        <item>我的</item>
+    </string-array>
+    <string-array name="array_main_humble">
+        <item>推荐给好友</item>
+        <item>我的收藏</item>
+        <item>我的关注</item>
+        <item>客服电话</item>
+    </string-array>
 </resources>
