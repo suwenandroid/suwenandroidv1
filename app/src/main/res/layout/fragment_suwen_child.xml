@@ -18,6 +18,7 @@
         <ImageView
             android:id="@+id/suwen_iv_more"
             android:layout_width="22dp"
+            android:visibility="gone"
             android:layout_height="22dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -25,8 +26,10 @@
     </RelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/suwen_pull_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.suwen.suwenandroid2016v1.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @version 3.1.1
  * @since 2016-07-31 21:55
  */
-public class SuwenList {
+public class SuwenList implements Serializable {
 
     /**
      * code : 0
@@ -43,7 +44,7 @@ public class SuwenList {
         this.data = data;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable {
         private int code;
         private Object message;
         private int sampleTime;
@@ -73,7 +74,7 @@ public class SuwenList {
         }
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         private int pageNO;
         private int pageSize;
         private int count;
@@ -126,7 +127,7 @@ public class SuwenList {
             this.dataList = dataList;
         }
 
-        public static class DataListBean {
+        public static class DataListBean implements Serializable {
             private String title;
             private String content;
             private int infoId;

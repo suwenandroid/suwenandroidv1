@@ -28,7 +28,7 @@ import retrofit.converter.GsonConverter;
  * Client Rest
  */
 public class RestClient {
-    public static final String BASE_URL = "http://115.28.203.44:8010/";
+    public static final String BASE_URL = "http://120.27.93.112:8800/";
     private static ApiService apiService;
 
     /**

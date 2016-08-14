@@ -1,6 +1,7 @@
 package com.suwen.suwenandroid2016v1.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +11,15 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.suwen.suwenandroid2016v1.R;
+import com.suwen.suwenandroid2016v1.activity.DetailActivity;
 import com.suwen.suwenandroid2016v1.adapter.AbsAdapter;
 import com.suwen.suwenandroid2016v1.adapter.DataAdapter;
 import com.suwen.suwenandroid2016v1.adapter.GalleryPagerAdapter;
@@ -24,6 +29,7 @@ import com.suwen.suwenandroid2016v1.beans.AdverList;
 import com.suwen.suwenandroid2016v1.beans.SuwenList;
 import com.suwen.suwenandroid2016v1.rest.RestClient;
 import com.suwen.suwenandroid2016v1.utils.CommonUtils;
+import com.suwen.suwenandroid2016v1.utils.RefreshUtil;
 import com.suwen.suwenandroid2016v1.utils.SysUtil;
 import com.suwen.suwenandroid2016v1.utils.popup.BaseDialog;
 import com.suwen.suwenandroid2016v1.utils.popup.PopupUtils;
@@ -45,6 +51,7 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
 
     private RelativeLayout mAdContainer;
     private ImageView ivMore;
+    private PullToRefreshScrollView mPullToRefreshScrollView;
     private Activity mActivity;
     private MyListView mListView;
     private List<SuwenList.DataBean.DataListBean> mDatas = new ArrayList<>();
@@ -112,7 +119,7 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
     }
 
     private void setTabPagerIndicator() {
-        mTabsScroller.setIndicatorMode(TabsScroller.IndicatorMode.MODE_NOWEIGHT_EXPAND_NOSAME);// 设置模式，一定要先设置模式
+        mTabsScroller.setIndicatorMode(TabsScroller.IndicatorMode.MODE_NOWEIGHT_NOEXPAND_NOSAME);// 设置模式，一定要先设置模式
         mTabsScroller.setDividerColor(Color.parseColor("#00bbcf"));// 设置分割线的颜色
         mTabsScroller.setDividerPadding(CommonUtils.dip2px(mActivity, 10));
         mTabsScroller.setIndicatorColor(Color.parseColor("#43A44b"));// 设置底部导航线的颜色
@@ -125,15 +132,18 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
      * 初始化数据
      */
     private void initData() {
-        mStringList.add("测试1111");
-        mStringList.add("测试2222");
-        mStringList.add("测试3333");
+        mStringList.add("测试1");
+        mStringList.add("测试2");
+     /*   mStringList.add("测试3333");
         mStringList.add("测试444");
-        mStringList.add("测试555");
+        mStringList.add("测试555");*/
         mStringList.add("测试666");
         mStringList.add("测试777");
         mStringList.add("测试8");
-        mStringList.add("测试9");
+        mStringList.add("测试3");
+        if (mStringList.size() > 5) {
+            ivMore.setVisibility(View.VISIBLE);
+        }
         RestClient.getApiService().getAdvertList("5", new Callback<AdverList>() {
             @Override
             public void success(AdverList adverList, Response response) {
@@ -143,7 +153,7 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
 
             @Override
             public void failure(RetrofitError error) {
-                mInfiniteViewPager.setVisibility(View.GONE);
+                //mInfiniteViewPager.setVisibility(View.GONE);
             }
         });
         mTabsScroller.setIndicatorMode(TabsScroller.IndicatorMode.MODE_NOWEIGHT_EXPAND_SAME);
@@ -187,7 +197,7 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
                         mPagerWidth = getResources().getDisplayMetrics().widthPixels;
                         mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
                     } else {
-                        mPagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 4 / POINT_MARGIN_LEFT);
+                        mPagerWidth = (getResources().getDisplayMetrics().widthPixels * 4 / POINT_MARGIN_LEFT);
                         if (mGalleryPagerAdapter == null) {
                             mGalleryPagerAdapter = new GalleryPagerAdapter(mActivity, mAderts);
                         }
@@ -265,13 +275,26 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
      * @param mRootView
      */
     private void initView(View mRootView) {
+        if (mPullToRefreshScrollView == null) {
+            mPullToRefreshScrollView = (PullToRefreshScrollView) mRootView.findViewById(R.id.suwen_pull_scrollview);
+        }
+        new RefreshUtil().initScollView(mActivity, PullToRefreshBase.Mode.BOTH, mPullToRefreshScrollView);
         if (mListView == null) {
             mListView = (MyListView) mRootView.findViewById(R.id.suwen_listview);
         }
         mListView.setFocusable(false);
         mSuwenAdapter = new DataAdapter(mActivity, R.layout.item_data, mDatas);
         mListView.setAdapter(mSuwenAdapter);
-
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mActivity, DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("data", mDatas.get(position));
+                intent.putExtra("data", bundle);
+                startActivity(intent);
+            }
+        });
         if (mInfiniteViewPager == null) {
             mInfiniteViewPager = (MyInfiniteViewPager) mRootView.findViewById(R.id.ad_pager);
         }

@@ -1,5 +1,6 @@
 package com.suwen.suwenandroid2016v1.views;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -74,7 +75,6 @@ public class TabsScroller extends HorizontalScrollView {
     private int tabTextColorSelected = Color.parseColor("#ffffff");// 标题被选中时字体颜色
 
     private int lastScrollX = 0;
-
     private int tabBackgroundResId;
 //    = R.drawable.background_tab;//字体颜色的选择器
 
@@ -126,6 +126,7 @@ public class TabsScroller extends HorizontalScrollView {
         tabsContainer = new LinearLayout(context);
         tabsContainer.setOrientation(LinearLayout.HORIZONTAL);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        tabsContainer.setGravity(Gravity.CENTER);
         tabsContainer.setLayoutParams(layoutParams);
         addView(tabsContainer);
 
@@ -231,6 +232,7 @@ public class TabsScroller extends HorizontalScrollView {
         tabCount = strings.size();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void addTextTab(final int position, final String title) {
 
         final TextView tab = new TextView(getContext());
@@ -250,12 +252,17 @@ public class TabsScroller extends HorizontalScrollView {
             wrapTabLayoutParams.setMargins(tabPadding, 0, tabPadding, 0);
             weightTabLayoutParams.setMargins(tabPadding, 0, tabPadding, 0);
         }
+       /* if (position == 0) {
+            View view = new View(mContext);
+            view.setLayoutParams(new ViewGroup.LayoutParams(5, ViewGroup.LayoutParams.MATCH_PARENT));
+            view.setBackgroundColor(getResources().getColor(R.color.color_grap));
+            tabsContainer.addView(view);
+        }*/
         tabsContainer.addView(tab, position, isSameLine ? wrapTabLayoutParams : weightTabLayoutParams);
         tab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 setPositionSelected(position);
-
             }
         });
         invalidate();
@@ -594,7 +601,7 @@ public class TabsScroller extends HorizontalScrollView {
         int sumWidth = 0;
         for (int i = 0; i < currentPosition; i++) {
             sumWidth += tabsContainer.getChildAt(i).getWidth();
-            sumWidth+=tabPadding;
+            sumWidth += tabPadding;
         }
         scrollTo(sumWidth, 0);
     }
