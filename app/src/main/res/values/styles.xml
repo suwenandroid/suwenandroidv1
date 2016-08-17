@@ -33,6 +33,26 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!--y用户信息的每一个Item的Layout-->
+    <style name="UserInfoItemLayout">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/color_white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+    <!--用户信息的Layout item里面的EditText和TextView的属性应该是一样的-->
+    <style name="UserEditAndText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">right</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@null</item>
+    </style>
     <!-- dialog相关 -->
     <style name="Dialog_Body">
         <item name="android:background">#ffffff</item>

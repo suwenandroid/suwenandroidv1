@@ -15,6 +15,7 @@
         android:padding="3dp">
 
         <ImageButton
+            android:id="@+id/imgbtn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -33,6 +34,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/btn_info_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -67,13 +69,7 @@
                 android:background="@drawable/shape_user_info"
                 android:orientation="vertical">
                 <!--昵称-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                <LinearLayout style="@style/UserInfoItemLayout">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -81,12 +77,14 @@
                         android:text="昵称:" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:singleLine="true"
+                        style="@style/UserEditAndText"
+                        android:id="@+id/tv_name"
                         android:text="醉生梦死丶" />
+                    <EditText
+                      style="@style/UserEditAndText"
+                        android:id="@+id/edit_name"
+                        android:visibility="gone"
+                        />
                 </LinearLayout>
 
                 <View
@@ -94,13 +92,7 @@
                     android:layout_height="1dp"
                     android:background="@color/color_activity_bg" />
                 <!--登录邮箱-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                <LinearLayout style="@style/UserInfoItemLayout">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,13 +114,7 @@
                     android:layout_height="1dp"
                     android:background="@color/color_activity_bg" />
                 <!--绑定手机-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                <LinearLayout style="@style/UserInfoItemLayout">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -149,13 +135,7 @@
                     android:layout_height="1dp"
                     android:background="@color/color_activity_bg" />
                 <!--性别-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                <LinearLayout style="@style/UserInfoItemLayout">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,13 +156,7 @@
                     android:layout_height="1dp"
                     android:background="@color/color_activity_bg" />
                 <!--生日-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                <LinearLayout style="@style/UserInfoItemLayout">
 
                     <TextView
                         android:layout_width="wrap_content"

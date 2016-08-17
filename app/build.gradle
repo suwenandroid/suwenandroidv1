@@ -10,10 +10,14 @@ android {
 
         }
         release {
+            /* release {
+            storeFile file("")
+>>>>>>> 7b43160f4a3ff3267079e3b331b1efd549a4d8f0
             storePassword "su2016wen"
             keyAlias "myKey"
             keyPassword"20suwen16"
 
+        }*/
         }
     }
     defaultConfig {
@@ -25,7 +29,6 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
             shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
