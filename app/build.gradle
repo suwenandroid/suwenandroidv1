@@ -9,13 +9,13 @@ android {
         debug {
 
         }
-        release {
+       /* release {
             storeFile file("")
             storePassword "su2016wen"
             keyAlias "myKey"
             keyPassword"20suwen16"
 
-        }
+        }*/
     }
     defaultConfig {
         applicationId "com.suwen.suwenandroid2016v1"
@@ -26,7 +26,6 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
             shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
