@@ -10,7 +10,6 @@ android {
 
         }
         release {
-            storeFile file("")
             storePassword "su2016wen"
             keyAlias "myKey"
             keyPassword"20suwen16"

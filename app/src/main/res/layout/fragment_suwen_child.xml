@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#f00">
+        android:background="@color/colorPrimary">
 
         <com.suwen.suwenandroid2016v1.views.TabsScroller
             android:id="@+id/tabscroller"
@@ -18,11 +18,11 @@
         <ImageView
             android:id="@+id/suwen_iv_more"
             android:layout_width="22dp"
-            android:visibility="gone"
             android:layout_height="22dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/iv_rirht" />
+            android:src="@drawable/iv_rirht"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView

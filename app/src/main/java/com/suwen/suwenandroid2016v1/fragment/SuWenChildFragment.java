@@ -136,10 +136,10 @@ public class SuWenChildFragment extends BaseFragment implements View.OnClickList
         mStringList.add("测试2");
      /*   mStringList.add("测试3333");
         mStringList.add("测试444");
-        mStringList.add("测试555");*/
+        mStringList.add("测试555");
         mStringList.add("测试666");
         mStringList.add("测试777");
-        mStringList.add("测试8");
+        mStringList.add("测试8");*/
         mStringList.add("测试3");
         if (mStringList.size() > 5) {
             ivMore.setVisibility(View.VISIBLE);
