@@ -1,7 +1,7 @@
 package com.suwen.suwenandroid2016v1.activity;
 
+import android.content.Intent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,6 +21,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     // 一个是TextView在不可编辑的状态的时候显示
     private EditText mEditName;
     private TextView mTvName;
+    //修改密码的按钮
+    private Button mBtnChangePwd;
 
 
     @Override
@@ -34,6 +36,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         mBtnInfoEdit = (Button) this.findViewById(R.id.btn_info_edit);
         mEditName = (EditText) this.findViewById(R.id.edit_name);
         mTvName = (TextView) this.findViewById(R.id.tv_name);
+        mBtnChangePwd = (Button) this.findViewById(R.id.btn_setting_change_pwd);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private void setListener() {
         mImgBtnBack.setOnClickListener(this);
         mBtnInfoEdit.setOnClickListener(this);
+        mBtnChangePwd.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +58,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.btn_info_edit:
                 dealEdit();
+                break;
+            case R.id.btn_setting_change_pwd:
+                startActivity(new Intent(this,ChangePwdActivity.class));
+                this.finish();
                 break;
             default:
                 break;
@@ -79,7 +87,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             mEditName.setVisibility(View.GONE);
             mTvName.setVisibility(View.VISIBLE);
             mTvName.setText(mEditName.getText().toString().trim());
-
         }
 
     }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.suwen.suwenandroid2016v1.R;
 import com.suwen.suwenandroid2016v1.activity.AppSettingActivity;
+import com.suwen.suwenandroid2016v1.activity.FeedbackActivity;
 import com.suwen.suwenandroid2016v1.activity.UserInfoActivity;
 import com.suwen.suwenandroid2016v1.adapter.MineAdapter;
 
@@ -79,6 +81,24 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private void setListener() {
         imgAvater.setOnClickListener(this);
         tvSetting.setOnClickListener(this);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(mContext,AppSettingActivity.class));
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+                        startActivity(new Intent(mContext, FeedbackActivity.class));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     private void loadData() {

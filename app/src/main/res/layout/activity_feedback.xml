@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.suwen.suwenandroid2016v1.activity.FeedbackActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <include
+            android:id="@+id/title"
+            layout="@layout/include_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/rectangle"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="填写下您的名字"
+                    android:maxLength="10"
+                    android:paddingLeft="3dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rectangle"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/color_transparent"
+                    android:gravity="center_vertical"
+                    android:hint="填写下您的联系方式"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rectangle"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_opinion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/color_transparent"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="写下您遇到的问题或建议"
+                    android:paddingTop="10dp"
+                    android:textSize="14sp"></EditText>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="提交"
+                android:background="@color/color_red"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
